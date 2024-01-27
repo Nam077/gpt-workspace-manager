@@ -1,0 +1,86 @@
+ADD: nam077.exe@gmail.com | phucvnguyen1806@gmail.com | {"account_invites":[{"id":"7f656b95-8fce-4e9c-992d-9a47b03edbce","email_address":"nam077.exe@gmail.com","role":"standard-user","created_time":"2024-01-26T11:07:35.552104+00:00"}],"errored_emails":[]}
+ADD: chatgpt8@outdorium.com,gpt@mailnguyen.net,kimoanh2401@gmail.com,lamvietbach101@gmail.com,nga.truong@tuphuongpharmacy.com | neelyanthoane434@gmail.com | {"account_invites":[{"id":"feed6927-0a6b-421e-9d0f-3edf140fd1e0","email_address":"chatgpt8@outdorium.com","role":"standard-user","created_time":"2024-01-26T11:07:34.928118+00:00"},{"id":"a4c4a46d-1969-45a3-a1c5-577802097ad8","email_address":"gpt@mailnguyen.net","role":"standard-user","created_time":"2024-01-26T11:07:35.679715+00:00"},{"id":"862bf76c-b736-4c0a-8ee1-cc23112f758f","email_address":"kimoanh2401@gmail.com","role":"standard-user","created_time":"2024-01-26T11:07:36.590312+00:00"},{"id":"a691ebb1-244d-4d5c-a2fd-c571e725addb","email_address":"lamvietbach101@gmail.com","role":"standard-user","created_time":"2024-01-26T11:07:37.941608+00:00"},{"id":"3c4806a4-0624-4b8e-82fb-f05395ffb31e","email_address":"nga.truong@tuphuongpharmacy.com","role":"standard-user","created_time":"2024-01-26T11:07:39.426765+00:00"}],"errored_emails":[]}
+ADD: nam077.exe@gmail.com | phucvnguyen1806@gmail.com | {"account_invites":[{"id":"7f656b95-8fce-4e9c-992d-9a47b03edbce","email_address":"nam077.exe@gmail.com","role":"standard-user","created_time":"2024-01-26T11:07:35.552104+00:00"}],"errored_emails":[]}
+ADD: chatgpt8@outdorium.com,gpt@mailnguyen.net,kimoanh2401@gmail.com,lamvietbach101@gmail.com,nga.truong@tuphuongpharmacy.com | neelyanthoane434@gmail.com | {"account_invites":[{"id":"feed6927-0a6b-421e-9d0f-3edf140fd1e0","email_address":"chatgpt8@outdorium.com","role":"standard-user","created_time":"2024-01-26T11:07:34.928118+00:00"},{"id":"a4c4a46d-1969-45a3-a1c5-577802097ad8","email_address":"gpt@mailnguyen.net","role":"standard-user","created_time":"2024-01-26T11:07:35.679715+00:00"},{"id":"862bf76c-b736-4c0a-8ee1-cc23112f758f","email_address":"kimoanh2401@gmail.com","role":"standard-user","created_time":"2024-01-26T11:07:36.590312+00:00"},{"id":"a691ebb1-244d-4d5c-a2fd-c571e725addb","email_address":"lamvietbach101@gmail.com","role":"standard-user","created_time":"2024-01-26T11:07:37.941608+00:00"},{"id":"3c4806a4-0624-4b8e-82fb-f05395ffb31e","email_address":"nga.truong@tuphuongpharmacy.com","role":"standard-user","created_time":"2024-01-26T11:07:39.426765+00:00"}],"errored_emails":[]}
+phucvnguyen1806@gmail.com | ADD: nam077.exe@gmail.com | phucvnguyen1806@gmail.com 
+neelyanthoane434@gmail.com | ADD: chatgpt8@outdorium.com,gpt@mailnguyen.net,kimoanh2401@gmail.com,lamvietbach101@gmail.com,nga.truong@tuphuongpharmacy.com | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE PENDING: {"id":"132ada2d-6039-4c5d-b5fe-f07d7642738b","email_address":"ahhateddy@gmail.com","role":"standard-user","created_time":"2024-01-26T11:49:19.592225+00:00"} | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE PENDING: {"id":"5736c2f1-ac06-447e-aa8c-b0f9429a9020","email_address":"namnguyen177a@gmail.com","role":"standard-user","created_time":"2024-01-26T11:50:08.368317+00:00"} | neelyanthoane434@gmail.com 
+phucvnguyen1806@gmail.com | ADD: nam077.exe@gmail.com | phucvnguyen1806@gmail.com 
+neelyanthoane434@gmail.com | ADD: chatgpt8@outdorium.com, gpt@mailnguyen.net, kimoanh2401@gmail.com, lamvietbach101@gmail.com, nga.truong@tuphuongpharmacy.com | neelyanthoane434@gmail.com 
+phucvnguyen1806@gmail.com | ADD: nam077.exe@gmail.com | phucvnguyen1806@gmail.com 
+neelyanthoane434@gmail.com | DELETE USER: {"id":"user-tb4qHllqhOZqlO5BZNrqDZd5","email":"ahhateddy@gmail.com","role":"standard-user","name":"teddy haha","created_time":"2024-01-26T11:51:42.397882+00:00"} | neelyanthoane434@gmail.com | {"success":true}
+neelyanthoane434@gmail.com | ADD: chatgpt8@outdorium.com, gpt@mailnguyen.net, kimoanh2401@gmail.com, lamvietbach101@gmail.com, nga.truong@tuphuongpharmacy.com | neelyanthoane434@gmail.com 
+phucvnguyen1806@gmail.com | ADD: nam077.exe@gmail.com | phucvnguyen1806@gmail.com 
+neelyanthoane434@gmail.com | ADD: chatgpt8@outdorium.com, gpt@mailnguyen.net, kimoanh2401@gmail.com, lamvietbach101@gmail.com, nga.truong@tuphuongpharmacy.com | neelyanthoane434@gmail.com 
+phucvnguyen1806@gmail.com | ADD: nam077.exe@gmail.com | phucvnguyen1806@gmail.com 
+neelyanthoane434@gmail.com | ADD: chatgpt8@outdorium.com, gpt@mailnguyen.net, kimoanh2401@gmail.com, lamvietbach101@gmail.com, nga.truong@tuphuongpharmacy.com | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE USER: {"id":"user-tb4qHllqhOZqlO5BZNrqDZd5","email":"ahhateddy@gmail.com","role":"standard-user","name":"teddy haha","created_time":"2024-01-26T11:51:42.397882+00:00"} | neelyanthoane434@gmail.com | {"success":true}
+neelyanthoane434@gmail.com | ADD: chatgpt8@outdorium.com, gpt@mailnguyen.net, kimoanh2401@gmail.com, lamvietbach101@gmail.com, nga.truong@tuphuongpharmacy.com | neelyanthoane434@gmail.com 
+phucvnguyen1806@gmail.com | ADD: nam077.exe@gmail.com | phucvnguyen1806@gmail.com 
+phucvnguyen1806@gmail.com | ADD: nam077.exe@gmail.com | phucvnguyen1806@gmail.com 
+neelyanthoane434@gmail.com | ADD: chatgpt8@outdorium.com, kimoanh2401@gmail.com, lamvietbach101@gmail.com, nga.truong@tuphuongpharmacy.com | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE PENDING: {"id":"461a7146-1a26-4790-9eb9-f90afcad3e90","email_address":"namnguyen177a@gmail.com","role":"standard-user","created_time":"2024-01-26T14:23:41.256757+00:00"} | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE USER: {"id":"user-K05VLSjLKxFpf4b2jluQ2NwZ","email":"rawnjith@gmail.com","role":"standard-user","name":"Ranjith Raj","created_time":"2024-01-26T14:46:46.940191+00:00"} | neelyanthoane434@gmail.com | {"success":true}
+phucvnguyen1806@gmail.com | ADD: nam077.exe@gmail.com | phucvnguyen1806@gmail.com 
+neelyanthoane434@gmail.com | ADD: chatgpt8@outdorium.com, kimoanh2401@gmail.com, lamvietbach101@gmail.com, nga.truong@tuphuongpharmacy.com | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE USER: {"id":"user-tb4qHllqhOZqlO5BZNrqDZd5","email":"ahhateddy@gmail.com","role":"standard-user","name":"teddy haha","created_time":"2024-01-26T11:51:42.397882+00:00"} | neelyanthoane434@gmail.com | {"success":true}
+phucvnguyen1806@gmail.com | ADD: nam077.exe@gmail.com | phucvnguyen1806@gmail.com 
+neelyanthoane434@gmail.com | DELETE USER: {"id":"user-fDqgFxxcR2zgS19XqLGUQ9YA","email":"araidetomaki@gmail.com","role":"standard-user","name":"Araide Tomoaki","created_time":"2024-01-26T16:18:18.655077+00:00"} | neelyanthoane434@gmail.com | {"success":true}
+neelyanthoane434@gmail.com | ADD: kimoanh2401@gmail.com, nga.truong@tuphuongpharmacy.com | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE USER: {"id":"user-Ws8CtFsRoYxOkeTGl37h4gdc","email":"chatgpt8@outdorium.com","role":"standard-user","name":"chatgpt Eight","created_time":"2024-01-23T08:32:21.875144+00:00"} | neelyanthoane434@gmail.com | {"success":true}
+neelyanthoane434@gmail.com | DELETE USER: {"id":"user-dmSpKUiQEnuRq8OSapaynebB","email":"lamvietbach101@gmail.com","role":"standard-user","name":"Lâm Việt Bách","created_time":"2024-01-23T09:38:33.436551+00:00"} | neelyanthoane434@gmail.com | {"success":true}
+phucvnguyen1806@gmail.com | DELETE USER: {"id":"user-SgZgTmtBgbYH7UhUXLIZYBH2","email":"burnaugh443@outlook.com.ar","role":"standard-user","name":"Jsitagh Khrwbep","created_time":"2024-01-11T08:58:53.400025+00:00"} | phucvnguyen1806@gmail.com | {"success":true}
+neelyanthoane434@gmail.com | DELETE USER: {"id":"user-intXQ70OS2wrKIBuuFIV7ccf","email":"m.sajjadmeo@gmail.com","role":"standard-user","name":"Muhammad  Sajjad","created_time":"2024-01-23T07:42:16.769339+00:00"} | neelyanthoane434@gmail.com | {"success":true}
+neelyanthoane434@gmail.com | DELETE USER: {"id":"user-yAmcDyjimThBEUX0F8evHIph","email":"trankimngan.2000.fpt@gmail.com","role":"standard-user","name":"Kim Ngan","created_time":"2024-01-24T01:17:09.579788+00:00"} | neelyanthoane434@gmail.com | {"success":true}
+neelyanthoane434@gmail.com | DELETE USER: {"id":"user-gE9sIwc4KNjyYTIZnoGjLGJd","email":"gpt@mailnguyen.net","role":"standard-user","name":"Mr Nguyen","created_time":"2024-01-23T05:52:48.939780+00:00"} | neelyanthoane434@gmail.com | {"success":true}
+neelyanthoane434@gmail.com | DELETE USER: {"id":"user-yzKvE6EqBuUTuTVR3G1gUW2p","email":"hyharisharis@gmail.com","role":"standard-user","name":"H","created_time":"2024-01-23T07:41:43.922628+00:00"} | neelyanthoane434@gmail.com | {"success":true}
+phucvnguyen1806@gmail.com | DELETE PENDING: {"id":"7f656b95-8fce-4e9c-992d-9a47b03edbce","email_address":"nam077.exe@gmail.com","role":"standard-user","created_time":"2024-01-26T11:07:35.552104+00:00"} | phucvnguyen1806@gmail.com 
+neelyanthoane434@gmail.com | DELETE PENDING: {"id":"862bf76c-b736-4c0a-8ee1-cc23112f758f","email_address":"kimoanh2401@gmail.com","role":"standard-user","created_time":"2024-01-26T11:07:36.590312+00:00"} | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE PENDING: {"id":"3c4806a4-0624-4b8e-82fb-f05395ffb31e","email_address":"nga.truong@tuphuongpharmacy.com","role":"standard-user","created_time":"2024-01-26T11:07:39.426765+00:00"} | neelyanthoane434@gmail.com 
+phucvnguyen1806@gmail.com | ADD:  | phucvnguyen1806@gmail.com 
+neelyanthoane434@gmail.com | ADD:  | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | ADD:  | neelyanthoane434@gmail.com 
+phucvnguyen1806@gmail.com | ADD:  | phucvnguyen1806@gmail.com 
+phucvnguyen1806@gmail.com | ADD:  | phucvnguyen1806@gmail.com 
+phucvnguyen1806@gmail.com | ADD:  | phucvnguyen1806@gmail.com 
+phucvnguyen1806@gmail.com | DELETE USER: {"id":"user-SgZgTmtBgbYH7UhUXLIZYBH2","email":"burnaugh443@outlook.com.ar","role":"standard-user","name":"Jsitagh Khrwbep","created_time":"2024-01-11T08:58:53.400025+00:00"} | phucvnguyen1806@gmail.com | {"success":true}
+phucvnguyen1806@gmail.com | DELETE PENDING: {"id":"ab10948f-316c-49c8-a0fc-c56a2fb3474f","email_address":"nam077.exe@gmail.com","role":"standard-user","created_time":"2024-01-27T07:40:33.444430+00:00"} | phucvnguyen1806@gmail.com 
+phucvnguyen1806@gmail.com | ADD:  | phucvnguyen1806@gmail.com 
+phucvnguyen1806@gmail.com | ADD:  | phucvnguyen1806@gmail.com 
+phucvnguyen1806@gmail.com | ADD:  | phucvnguyen1806@gmail.com 
+neelyanthoane434@gmail.com | ADD:  | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | ADD:  | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | ADD:  | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | ADD:  | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | ADD:  | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | ADD:  | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | ADD:  | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | ADD: nam077.exe@gmail.com | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | ADD: nam077.exe@gmail.com | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE PENDING: {"id":"9af7bc06-27f4-4aad-94cb-e92fc39bcaf5","email_address":"chatgpt8@outdorium.com","role":"standard-user","created_time":"2024-01-27T07:40:32.883130+00:00"} | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE PENDING: {"id":"0dfc5826-bb0b-47e1-9172-d806aceab6f7","email_address":"gpt@mailnguyen.net","role":"standard-user","created_time":"2024-01-27T07:40:33.663366+00:00"} | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE PENDING: {"id":"03ca1989-001b-45c6-ad31-c9d304c35425","email_address":"kimoanh2401@gmail.com","role":"standard-user","created_time":"2024-01-27T07:40:34.403103+00:00"} | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE PENDING: {"id":"8923182d-9f46-4d37-9bc9-c7092da75093","email_address":"kenzakiosamu@gmail.com","role":"standard-user","created_time":"2024-01-27T12:41:09.737800+00:00"} | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | ADD: kenzakiosamu@gmail.com | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | ADD: kenzakiosamu@gmail.com | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE PENDING: {"id":"4272b0eb-64b9-446f-81c3-61fd961d3c52","email_address":"kenzakiosamu@gmail.com","role":"standard-user","created_time":"2024-01-27T12:43:49.885964+00:00"} | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | ADD: kenzakiosamu@gmail.com | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE PENDING: {"id":"08fe2b54-f102-49e2-9e42-582f476e0913","email_address":"kenzakiosamu@gmail.com","role":"standard-user","created_time":"2024-01-27T12:46:17.954544+00:00"} | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | ADD: kenzakiosamu@gmail.com | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE PENDING: {"id":"7ec2ab0f-427d-453d-8d87-52374cb0f8c8","email_address":"kenzakiosamu@gmail.com","role":"standard-user","created_time":"2024-01-27T12:49:37.614991+00:00"} | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | ADD: kenzakiosamu@gmail.com | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE PENDING: {"id":"83087bc6-3ee5-4aef-a49f-5ae46a7e057c","email_address":"kenzakiosamu@gmail.com","role":"standard-user","created_time":"2024-01-27T12:50:49.847721+00:00"} | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | ADD: kenzakiosamu@gmail.com | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE PENDING: {"id":"96ca426a-f033-4373-95ba-52601f336cff","email_address":"kenzakiosamu@gmail.com","role":"standard-user","created_time":"2024-01-27T12:52:31.408890+00:00"} | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | ADD: kenzakiosamu@gmail.com
+ | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE PENDING: {"id":"1f327d2e-44b6-4c36-88c4-f47b6dcf158a","email_address":"kenzakiosamu@gmail.com","role":"standard-user","created_time":"2024-01-27T12:53:56.514628+00:00"} | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | ADD: kenzakiosamu@gmail.com
+ | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | ADD: namnguyen177a@gmail.com | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE PENDING: {"id":"0205b1bc-d7da-4bca-8b0d-6fed8bd857f3","email_address":"namnguyen177a@gmail.com","role":"standard-user","created_time":"2024-01-27T12:58:00.111639+00:00"} | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | ADD: namnguyen177a@gmail.com | neelyanthoane434@gmail.com 
+neelyanthoane434@gmail.com | DELETE PENDING: {"id":"8931f49f-8ff0-4c63-9028-8393a22cbb93","email_address":"namnguyen177a@gmail.com","role":"standard-user","created_time":"2024-01-27T12:59:57.854043+00:00"} | neelyanthoane434@gmail.com 
+phucvnguyen1806@gmail.com | DELETE PENDING: {"id":"5917b380-4063-467c-8b67-9e83bb59892d","email_address":"namnguyen177a@gmail.com","role":"standard-user","created_time":"2024-01-27T12:40:00.963013+00:00"} | phucvnguyen1806@gmail.com 
+phucvnguyen1806@gmail.com | ADD: nam077.exe@gmail.com | phucvnguyen1806@gmail.com 
