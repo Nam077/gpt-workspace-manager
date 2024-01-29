@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import 'dotenv/config';
+import { Cookie } from '../main';
 
 const logFile = 'log.txt';
 if (!fs.existsSync(logFile)) {
@@ -8,6 +9,7 @@ if (!fs.existsSync(logFile)) {
 const writeFileLog = (message: string) => {
     fs.appendFileSync(logFile, message + '\n');
 };
+
 export interface UserData {
     user: {
         id: string;
@@ -43,29 +45,33 @@ export const chunk = <T>(array: T[], size: number): T[][] => {
     }
     return result;
 };
-
+const User_Agent =
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.142.86 Safari/537.36';
 export class Gpt {
-    public async getUserInformationByCookie(cookie: string): Promise<UserData> {
+    public async getUserInformationByCookie(cookie: Cookie): Promise<UserData> {
         try {
             const response = await fetch('https://chat.openai.com/api/auth/session', {
                 headers: {
                     accept: '*/*',
                     Referer: 'https://chat.openai.com/',
-                    cookie,
+                    cookie: cookie.cookie,
+                    'User-Agent': User_Agent,
                 },
                 method: 'GET',
             });
 
             if (response.ok) {
                 const data = await response.json();
-                data.user.account_id = this.getAccountIdByCookie(cookie);
+                data.user.account_id = this.getAccountIdByCookie(cookie.cookie);
                 return data;
             } else {
-                throw new Error('Không thể truy cập dữ liệu');
+                console.log(response.status);
+                throw new Error(`Không thể lấy được thể với cookie ${cookie.email}`);
             }
         } catch (error) {
-            console.error(error);
-            throw error;
+            console.error('Lỗi: ' + error.message);
+            writeFileLog(`Lỗi khi lấy thông tin từ ${cookie.email}: ${error.message}`);
+            return undefined;
         }
     }
 
@@ -75,45 +81,58 @@ export class Gpt {
         if (match) {
             return match[1];
         }
-        throw new Error('Không thể truy cập dữ liệu');
+        throw new Error('Cookie không hợp lệ');
     }
 
     public async getListUserFromWorkSpace(userData: UserData): Promise<UserWorkSpace[]> {
-        console.log(userData.user.account_id);
         const url = `https://chat.openai.com/backend-api/accounts/${userData.user.account_id}/users?offset=0&limit=25&query=`;
-        const response = await fetch(url, {
-            headers: {
-                accept: '*/*',
-                Referer: 'https://chat.openai.com/',
-                Authorization: `Bearer ${userData.accessToken}`,
-            },
-            method: 'GET',
-        });
+        try {
+            const response = await fetch(url, {
+                headers: {
+                    accept: '*/*',
+                    'User-Agent': User_Agent,
+                    Referer: 'https://chat.openai.com/',
+                    Authorization: `Bearer ${userData.accessToken}`,
+                },
+                method: 'GET',
+            });
 
-        if (response.ok) {
-            const data = await response.json();
-            return data['items'];
-        } else {
-            throw new Error('Không thể truy cập dữ liệu');
+            if (response.ok) {
+                const data = await response.json();
+                return data['items'];
+            } else {
+                throw new Error(`Lỗi khi lấy thông tin người dùng ${userData.user.email}`);
+            }
+        } catch (error) {
+            console.error('Lỗi: ' + error.message);
+            return undefined;
         }
     }
 
     public async getListUserPendingFromWorkSpace(userData: UserData): Promise<UserWorkSpace[]> {
         const url = `https://chat.openai.com/backend-api/accounts/${userData.user.account_id}/invites?offset=0&limit=25&query=`;
-        const response = await fetch(url, {
-            headers: {
-                accept: '*/*',
-                Referer: 'https://chat.openai.com/',
-                Authorization: `Bearer ${userData.accessToken}`,
-            },
-            method: 'GET',
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            return data['items'];
-        } else {
-            throw new Error('Không thể truy cập dữ liệu');
+        try {
+            const response = await fetch(url, {
+                headers: {
+                    accept: '*/*',
+                    'User-Agent': User_Agent,
+                    Referer: 'https://chat.openai.com/',
+                    Authorization: `Bearer ${userData.accessToken}`,
+                },
+                method: 'GET',
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                
+                return data['items'];
+            } else {
+                // Tạo một lỗi tùy chỉnh mà không bao gồm chi tiết về stack trace
+                throw new Error('Không thể lấy được danh sách người dùng đang chờ ' + userData.user.email);
+            }
+        } catch (error) {
+            console.error('Lỗi: ' + error.message);
+            return undefined;
         }
     }
 
@@ -124,6 +143,7 @@ export class Gpt {
                 {
                     headers: {
                         accept: '*/*',
+                        'User-Agent': User_Agent,
                         Authorization: `Bearer ${userData.accessToken}`,
                         'content-type': 'application/json',
                         Referer: 'https://chat.openai.com/',
@@ -135,8 +155,10 @@ export class Gpt {
             );
             const data = await response.json();
             if (!response.ok) {
-                console.error(data);
-                throw new Error('Không thể truy cập dữ liệu');
+                writeFileLog(
+                    `${userData.user.email} | DELETE PENDING: ${JSON.stringify(userWorkSpace)} | ${userData.user.email} `,
+                );
+                throw new Error(`Tài khoản ${userWorkSpace.email_address} có lỗi, vui là kiểm tra lại`);
             }
             console.log(`Xóa user ${userWorkSpace.email_address} thành công`);
             writeFileLog(
@@ -155,6 +177,7 @@ export class Gpt {
                 {
                     headers: {
                         accept: '*/*',
+                        'User-Agent': User_Agent,
                         Authorization: `Bearer ${userData.accessToken}`,
                         'content-type': 'application/json',
                         Referer: 'https://chat.openai.com/',
@@ -165,8 +188,10 @@ export class Gpt {
             );
             const data = await response.json();
             if (!response.ok) {
-                console.error(data);
-                throw new Error('Không thể truy cập dữ liệu');
+                writeFileLog(
+                    `${userData.user.email} | DELETE USER: ${JSON.stringify(userWorkSpace)} | ${userData.user.email} | ${JSON.stringify(data)}`,
+                );
+                throw new Error(`Tài khoản ${userWorkSpace.email} có lỗi, vui là kiểm tra lại`);
             }
             console.log(`Xóa user ${userWorkSpace.email} thành công`);
             writeFileLog(
@@ -210,6 +235,7 @@ export class Gpt {
                 {
                     headers: {
                         accept: '*/*',
+                        'User-Agent': User_Agent,
                         Authorization: `Bearer ${userData.accessToken}`,
                         'content-type': 'application/json',
                         Referer: 'https://chat.openai.com/',

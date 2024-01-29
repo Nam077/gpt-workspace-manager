@@ -4,6 +4,7 @@ import * as csv from 'csv-parser';
 import * as fs from 'fs';
 import 'dotenv/config';
 import * as express from 'express';
+import * as process from 'process';
 
 function parseTimeToSeconds(timeString: string): number {
     const regex = /(\d+[Dd])?(\d+[Hh])?(\d+[Mm])?(\d+[Ss])?/; // Mẫu regex để phân tích chuỗi
@@ -61,31 +62,53 @@ async function parseCSV(filePath: string): Promise<any[]> {
     });
 }
 
+export interface Cookie {
+    email: string;
+    cookie: string;
+}
+
+async function loadCookie(): Promise<Cookie[]> {
+    const filePath = process.env.COOKIE_PATH || './cookies.csv';
+    return (await parseCSV(filePath)) as Cookie[];
+}
+
 function convertUserToListEmail(users: User[]): string[] {
     return users.map((user) => user.email);
 }
 
-export async function processingTask(cookie: string, record: Record<string, User[]>) {
-    console.log('----------Processing task----------');
+export async function processingTask(cookie: Cookie, record: Record<string, User[]>) {
+    
     try {
         const gpt = new Gpt();
         const userData = await gpt.getUserInformationByCookie(cookie);
+        if (!userData) {
+            return;
+        }
         console.log('Get user from cookie: ' + userData.user.email);
         const userFromSheetBelongToUserData = record[userData.user.email] || [];
         const mainUsers = await gpt.getListUserFromWorkSpace(userData);
         const pendingUsers = await gpt.getListUserPendingFromWorkSpace(userData);
-
+        pendingUsers
+        if (mainUsers === undefined) {
+            return;
+        }
+        
+        
+        if (pendingUsers === undefined) {
+            
+            return;
+        }
         const redundantMainUsers = removeUserAdmin2(
             findDifference2(userFromSheetBelongToUserData, mainUsers),
             userData.user.email,
         );
+        
         const redundantPendingUsers = removeUserAdmin(
             findDifference(userFromSheetBelongToUserData, pendingUsers),
             userData.user.email,
         );
         await gpt.deleteMultiUserFromWorkSpaceUser(userData, redundantMainUsers);
         await gpt.deleteMultiUserFromWorkSpaceInvite(userData, redundantPendingUsers);
-        console.log('----------End processing task----------\n');
     } catch (error) {
         console.log(error);
     }
@@ -98,14 +121,22 @@ async function getDataFromGoogleSheet(googleSheet: GoogleSheet) {
     return data;
 }
 
-async function processingMainInvite(cookie: string, record: Record<string, User[]>) {
+async function processingMainInvite(cookie: Cookie, record: Record<string, User[]>) {
     try {
         const gpt = new Gpt();
         const userData = await gpt.getUserInformationByCookie(cookie);
-        console.log('Get user from cookie: ' + userData.user.email);
+        if (!userData) {
+            return;
+        }
         const userFromSheetBelongToUserData = record[userData.user.email] || [];
         const mainUsers = await gpt.getListUserFromWorkSpace(userData);
+        if (mainUsers === undefined) {
+            return;
+        }
         const pendingUsers = await gpt.getListUserPendingFromWorkSpace(userData);
+        if (pendingUsers === undefined) {
+            return;
+        }
         const lostUsers = findLostUsers(userFromSheetBelongToUserData, mainUsers, pendingUsers);
         const emails = convertUserToListEmail(lostUsers);
         if (emails.length > 0) {
@@ -118,13 +149,16 @@ async function processingMainInvite(cookie: string, record: Record<string, User[
 
 async function runInvite() {
     console.log('----------Inviting user to workspace----------');
-    const cookies = await parseCSV('./cookies.csv');
+    const cookies = await loadCookie();
     const googleSheet = new GoogleSheet();
     await googleSheet.init();
     const record = await getDataFromGoogleSheet(googleSheet);
+    if (record === undefined) {
+        return
+    }
     const task = [];
     for (const cookie of cookies) {
-        task.push(processingMainInvite(cookie.cookie, record));
+        task.push(processingMainInvite(cookie, record));
     }
     const taskChunks = chunk(task, 10);
     for (const chunk of taskChunks) {
@@ -148,14 +182,17 @@ async function run() {
 }
 
 async function runScan() {
-    const cookies = await parseCSV('./cookies.csv');
+    const cookies = await loadCookie();
     const googleSheet = new GoogleSheet();
     await googleSheet.init();
     let record = await getDataFromGoogleSheet(googleSheet);
+    if (record === undefined) {
+        return;
+    }
     // Chạy một lần đầu
     const task = [];
     for (const cookie of cookies) {
-        task.push(processingTask(cookie.cookie, record));
+        task.push(processingTask(cookie, record));
     }
     const taskChunks = chunk(task, 10);
     for (const chunk of taskChunks) {
@@ -167,17 +204,25 @@ async function runScan() {
             record = await getDataFromGoogleSheet(googleSheet);
             const task = [];
             for (const cookie of cookies) {
-                task.push(processingTask(cookie.cookie, record));
+                task.push(processingTask(cookie, record));
             }
             await Promise.all(task);
         },
         parseTimeToSeconds(process.env.CHECK_TIME || '5m'),
     );
 }
-
-async function startApp() {
-    await Promise.all([run(), runScan()]);
+async function runSafely() {
+    const check = true;
+    while (check) {
+        try {
+            await Promise.all([run(), runScan()]);
+            break; // Nếu không có lỗi, thoát khỏi vòng lặp
+        } catch (error) {
+            console.error('Đã xảy ra lỗi, khởi động lại...', error);
+            // Tùy chọn: Thêm một khoảng thời gian chờ trước khi khởi động lại
+            await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+    }
 }
 
-// Gọi hàm để khởi đầu ứng dụng ngay lập tức
-startApp();
+runSafely();

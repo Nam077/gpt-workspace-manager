@@ -8,7 +8,7 @@
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix",
     "start": "ts-node src/main.ts",
-    "build": "webpack --config webpack.config.js",
+    "build": "webpack --config  webpack.config.js ",
     "chay": "node dist/index.js",
     "pkg": "pkg dist/index.js",
     "invite": "ts-node src/invite.ts"
