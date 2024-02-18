@@ -1,28 +1,30 @@
 import { GoogleSheet, User } from './service/google-sheet';
 import { chunk, Gpt, UserWorkSpace } from './service/gpt';
-import * as csv from 'csv-parser';
-import * as fs from 'fs';
 import 'dotenv/config';
 import * as express from 'express';
 import * as process from 'process';
+import { readFile, updateCsvFile } from './service/csv';
+import * as fs from 'fs';
+
+const logFile = 'cookie.txt';
+if (!fs.existsSync(logFile)) {
+    fs.writeFileSync(logFile, '');
+}
+const writeFileLog = (message: string) => {
+    fs.appendFileSync(logFile, message + '\n');
+};
 
 function parseTimeToSeconds(timeString: string): number {
     const regex = /(\d+[Dd])?(\d+[Hh])?(\d+[Mm])?(\d+[Ss])?/; // Mẫu regex để phân tích chuỗi
-
     const matches = timeString.match(regex);
-
     if (!matches) {
         throw new Error('Invalid time format');
     }
-
     const days = parseInt(matches[1]?.replace(/[Dd]/g, '') || '0', 10);
     const hours = parseInt(matches[2]?.replace(/[Hh]/g, '') || '0', 10);
     const minutes = parseInt(matches[3]?.replace(/[Mm]/g, '') || '0', 10);
     const seconds = parseInt(matches[4]?.replace(/[Ss]/g, '') || '0', 10);
-
-    // Chuyển đổi thành giây
     const totalSeconds = days * 24 * 60 * 60 + hours * 60 * 60 + minutes * 60 + seconds;
-
     return totalSeconds * 1000;
 }
 
@@ -50,59 +52,47 @@ function findLostUsers(users: User[], userWorkSpaces: UserWorkSpace[], pendingUs
     );
 }
 
-async function parseCSV(filePath: string): Promise<any[]> {
-    const results: any[] = [];
-
-    return new Promise((resolve, reject) => {
-        fs.createReadStream(filePath)
-            .pipe(csv())
-            .on('data', (data) => results.push(data))
-            .on('end', () => resolve(results))
-            .on('error', (error) => reject(error));
-    });
-}
-
 export interface Cookie {
     email: string;
     cookie: string;
-}
-
-async function loadCookie(): Promise<Cookie[]> {
-    const filePath = process.env.COOKIE_PATH || './cookies.csv';
-    return (await parseCSV(filePath)) as Cookie[];
 }
 
 function convertUserToListEmail(users: User[]): string[] {
     return users.map((user) => user.email);
 }
 
+async function getUserDataFromCookie(gpt: Gpt, cookie: Cookie) {
+    const { userData, success } = await gpt.getUserInformationByCookie(cookie);
+    if (!success) {
+        await updateCsvFile('cookies.csv', cookie.email, 'cookie', 'error');
+        writeFileLog(`DIE | ${cookie.email}`);
+        return null;
+    }
+    return userData;
+}
+
 export async function processingTask(cookie: Cookie, record: Record<string, User[]>) {
-    
     try {
         const gpt = new Gpt();
-        const userData = await gpt.getUserInformationByCookie(cookie);
-        if (!userData) {
+        const userData = await getUserDataFromCookie(gpt, cookie);
+        if (userData === null) {
             return;
         }
         console.log('Get user from cookie: ' + userData.user.email);
         const userFromSheetBelongToUserData = record[userData.user.email] || [];
         const mainUsers = await gpt.getListUserFromWorkSpace(userData);
         const pendingUsers = await gpt.getListUserPendingFromWorkSpace(userData);
-        pendingUsers
+        pendingUsers;
         if (mainUsers === undefined) {
             return;
         }
-        
-        
         if (pendingUsers === undefined) {
-            
             return;
         }
         const redundantMainUsers = removeUserAdmin2(
             findDifference2(userFromSheetBelongToUserData, mainUsers),
             userData.user.email,
         );
-        
         const redundantPendingUsers = removeUserAdmin(
             findDifference(userFromSheetBelongToUserData, pendingUsers),
             userData.user.email,
@@ -124,8 +114,8 @@ async function getDataFromGoogleSheet(googleSheet: GoogleSheet) {
 async function processingMainInvite(cookie: Cookie, record: Record<string, User[]>) {
     try {
         const gpt = new Gpt();
-        const userData = await gpt.getUserInformationByCookie(cookie);
-        if (!userData) {
+        const userData = await getUserDataFromCookie(gpt, cookie);
+        if (userData === null) {
             return;
         }
         const userFromSheetBelongToUserData = record[userData.user.email] || [];
@@ -149,12 +139,12 @@ async function processingMainInvite(cookie: Cookie, record: Record<string, User[
 
 async function runInvite() {
     console.log('----------Inviting user to workspace----------');
-    const cookies = await loadCookie();
+    const cookies = await getCookies();
     const googleSheet = new GoogleSheet();
     await googleSheet.init();
     const record = await getDataFromGoogleSheet(googleSheet);
     if (record === undefined) {
-        return
+        return;
     }
     const task = [];
     for (const cookie of cookies) {
@@ -181,8 +171,13 @@ async function run() {
     });
 }
 
+const getCookies = async () => {
+    const cookies = await readFile<Cookie>('cookies.csv');
+    return cookies.filter((cookie) => cookie.cookie && cookie.cookie !== 'error');
+};
+
 async function runScan() {
-    const cookies = await loadCookie();
+    let cookies = await getCookies();
     const googleSheet = new GoogleSheet();
     await googleSheet.init();
     let record = await getDataFromGoogleSheet(googleSheet);
@@ -198,9 +193,9 @@ async function runScan() {
     for (const chunk of taskChunks) {
         await Promise.all(chunk);
     }
-
     setInterval(
         async () => {
+            cookies = await getCookies();
             record = await getDataFromGoogleSheet(googleSheet);
             const task = [];
             for (const cookie of cookies) {
@@ -211,6 +206,7 @@ async function runScan() {
         parseTimeToSeconds(process.env.CHECK_TIME || '5m'),
     );
 }
+
 async function runSafely() {
     const check = true;
     while (check) {
@@ -219,10 +215,11 @@ async function runSafely() {
             break; // Nếu không có lỗi, thoát khỏi vòng lặp
         } catch (error) {
             console.error('Đã xảy ra lỗi, khởi động lại...', error);
-            // Tùy chọn: Thêm một khoảng thời gian chờ trước khi khởi động lại
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise((resolve) => setTimeout(resolve, 1000));
         }
     }
 }
 
-runSafely();
+(async () => {
+    await runSafely();
+})();

@@ -47,31 +47,57 @@ export const chunk = <T>(array: T[], size: number): T[][] => {
 };
 const User_Agent =
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.142.86 Safari/537.36';
+
 export class Gpt {
-    public async getUserInformationByCookie(cookie: Cookie): Promise<UserData> {
+    public async getUserInformationByCookie(
+        cookie: Cookie,
+        retry = 5,
+    ): Promise<{
+        userData: UserData;
+        success: boolean;
+    }> {
         try {
             const response = await fetch('https://chat.openai.com/api/auth/session', {
                 headers: {
                     accept: '*/*',
+                    'accept-language': 'vi,en-US;q=0.9,en;q=0.8',
+                    'if-none-match': 'W/"ry8kirf8zj1du"',
+                    'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120", "YaBrowser";v="24.1", "Yowser";v="2.5"',
+                    'sec-ch-ua-mobile': '?0',
+                    'sec-ch-ua-platform': '"Windows"',
+                    'sec-fetch-dest': 'empty',
+                    'sec-fetch-mode': 'cors',
+                    'sec-fetch-site': 'same-origin',
                     Referer: 'https://chat.openai.com/',
                     cookie: cookie.cookie,
                     'User-Agent': User_Agent,
                 },
                 method: 'GET',
             });
-
             if (response.ok) {
                 const data = await response.json();
+                if (data['error']) {
+                    throw new Error(data['error']);
+                }
                 data.user.account_id = this.getAccountIdByCookie(cookie.cookie);
-                return data;
+                return {
+                    userData: data,
+                    success: true,
+                };
             } else {
                 console.log(response.status);
                 throw new Error(`Không thể lấy được thể với cookie ${cookie.email}`);
             }
         } catch (error) {
+            if (retry <= 0) {
+                writeFileLog(`${cookie.email} có thể đã bị die`);
+                return {
+                    userData: null,
+                    success: false,
+                };
+            }
             console.error('Lỗi: ' + error.message);
-            writeFileLog(`Lỗi khi lấy thông tin từ ${cookie.email}: ${error.message}`);
-            return undefined;
+            return this.getUserInformationByCookie(cookie, retry - 1);
         }
     }
 
@@ -121,10 +147,10 @@ export class Gpt {
                 },
                 method: 'GET',
             });
-            
+
             if (response.ok) {
                 const data = await response.json();
-                
+
                 return data['items'];
             } else {
                 // Tạo một lỗi tùy chỉnh mà không bao gồm chi tiết về stack trace
